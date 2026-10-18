@@ -20,130 +20,80 @@
       font-family: 'Merriweather', serif;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 12px;
       color: #2c2c2c;
     }
 
     .book-container {
-      perspective: 1500px;
       width: 100%;
-      max-width: 900px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      max-width: 650px;
+      position: relative;
     }
 
     .book {
       width: 100%;
-      min-height: 550px;
       background: #fbf7f0;
       border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 100px rgba(0,0,0,0.05);
-      display: flex;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      border: 8px solid #3d2b1f;
+      padding: 30px 15px 75px 15px; /* Để trống chỗ cho các nút chuyển trang bên dưới */
       position: relative;
-      overflow: hidden;
-      border: 12px solid #3d2b1f;
-    }
-
-    /* Gáy sách ở giữa */
-    .book::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 30px;
-      transform: translateX(-50%);
-      background: linear-gradient(to right, rgba(0,0,0,0.15), rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.15));
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .page {
-      flex: 1;
-      padding: 40px 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .page-left {
-      border-right: 1px solid rgba(0,0,0,0.08);
-      text-align: center;
-    }
-
-    .page-right {
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-    }
-
-    .book-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.8rem;
-      color: #8b0000;
-      margin-bottom: 10px;
-    }
-
-    .author-subtitle {
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #666;
-      margin-bottom: 30px;
-    }
-
-    .decoration {
-      color: #b8860b;
-      font-size: 1.2rem;
-      margin: 15px 0;
     }
 
     .poem-container {
       text-align: center;
-      margin: auto 0;
+      width: 100%;
     }
 
     .poem-title {
       font-family: 'Dancing Script', cursive;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       color: #3d2b1f;
       margin-bottom: 25px;
+      border-bottom: 1px solid rgba(61, 43, 31, 0.15);
+      padding-bottom: 10px;
+      display: inline-block;
+      width: 80%;
     }
 
     .poem-content {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       line-height: 2.2;
       font-style: italic;
       color: #2b2b2b;
+      white-space: nowrap; /* Đảm bảo câu thơ chạy hết 1 dòng không tự động rớt xuống */
+      word-break: keep-all;
     }
 
     .poem-author {
-      margin-top: 25px;
+      margin-top: 30px;
       font-weight: bold;
       font-style: normal;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #8b0000;
     }
 
     .page-number {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.85rem;
       color: #888;
-      text-align: center;
     }
 
-    /* Nút bấm chuyển trang */
+    /* Định vị nút bấm chuyển trang phía dưới */
     .nav-btn {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
+      bottom: 15px;
+      width: 48px;
+      height: 48px;
       background: #3d2b1f;
       color: #fbf7f0;
       border: none;
@@ -154,26 +104,26 @@
       align-items: center;
       font-size: 1.2rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       z-index: 20;
     }
 
-    .nav-btn:hover {
+    .nav-btn:active {
+      transform: scale(0.92);
       background: #8b0000;
-      transform: translateY(-50%) scale(1.1);
     }
 
-    .prev-btn { left: -25px; }
-    .next-btn { right: -25px; }
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
 
-    /* Pop-up Thông báo Lỗi Error Code 367 */
+    /* Modal báo lỗi Error Code 367 */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -181,6 +131,7 @@
       visibility: hidden;
       transition: all 0.3s ease;
       z-index: 999;
+      padding: 20px;
     }
 
     .modal-overlay.active {
@@ -190,36 +141,31 @@
 
     .error-card {
       background: #fff;
-      padding: 30px 40px;
+      padding: 30px 25px;
       border-radius: 12px;
       text-align: center;
-      max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       border-top: 6px solid #e74c3c;
-      transform: translateY(-20px);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .error-card {
-      transform: translateY(0);
     }
 
     .error-icon {
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: #e74c3c;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .error-code {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
       color: #7f8c8d;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       letter-spacing: 1px;
     }
 
     .error-msg {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #2c3e50;
       font-weight: 600;
       margin-bottom: 20px;
@@ -234,76 +180,47 @@
       font-size: 0.95rem;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.2s;
     }
 
-    .close-btn:hover {
-      background: #c0392b;
-    }
-
-    /* Custom Responsive cho Mobile */
-    @media (max-width: 768px) {
-      .book {
-        flex-direction: column;
-        min-height: auto;
+    /* Tối ưu cho màn hình cực nhỏ */
+    @media (max-width: 380px) {
+      .poem-content {
+        font-size: 0.98rem;
       }
-      .book::before { display: none; }
-      .page-left {
-        border-right: none;
-        border-bottom: 1px dashed #ccc;
-        padding-bottom: 30px;
+      .poem-title {
+        font-size: 2.1rem;
       }
-      .prev-btn { left: 10px; top: auto; bottom: 10px; transform: none; }
-      .next-btn { right: 10px; top: auto; bottom: 10px; transform: none; }
-      .prev-btn:hover, .next-btn:hover { transform: scale(1.1); }
     }
   </style>
 </head>
 <body>
 
   <div class="book-container">
-    <!-- Nút Mũi Tên Sang Trang Trái -->
-    <button class="nav-btn prev-btn" id="prevBtn">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-
-    <!-- Quyển Sách -->
+    <!-- Khung Trang Sách -->
     <div class="book">
-      <!-- Trang Trái: Bìa Trong / Tiêu Đề Tập Thơ -->
-      <div class="page page-left">
-        <div>
-          <div class="decoration"><i class="fa-solid fa-feather-pointed"></i></div>
-          <h1 class="book-title">Tập Thơ Điện Tử</h1>
-          <p class="author-subtitle">Tác giả: redKAI</p>
+      <div class="poem-container">
+        <h2 class="poem-title">Tri Ân Cô</h2>
+        <div class="poem-content">
+          Mùa thu ôi đẹp rạng ngời,<br>
+          Hoa sữa khoe sắc giữa trời thu sang.<br>
+          Hương thơm dịu ngọt nhẹ nhàng,<br>
+          Như tình cô dạy mênh mang lòng người.<br>
+          Chúc cô luôn nở nụ cười,<br>
+          Chèo thuyền tri thức, sáng ngời tương lai.
         </div>
-        
-        <div class="decoration">❦ ❦ ❦</div>
-
-        <div class="page-number">Trang I</div>
+        <p class="poem-author">— Tiến Trường (redKAI)</p>
       </div>
 
-      <!-- Trang Phải: Bài Thơ Đầu Tiên -->
-      <div class="page page-right">
-        <div class="poem-container">
-          <h2 class="poem-title">Tri Ân Cô</h2>
-          <div class="poem-content">
-            Mùa thu ôi đẹp rạng ngời,<br>
-            Hoa sữa khoe sắc giữa trời thu sang.<br>
-            Hương thơm dịu ngọt nhẹ nhàng,<br>
-            Như tình cô dạy mênh mang lòng người.<br>
-            Chúc cô luôn nở nụ cười,<br>
-            Chèo thuyền tri thức, sáng ngời tương lai.
-          </div>
-          <p class="poem-author">— Tiến Trường (redKAI)</p>
-        </div>
-        <div class="page-number">Trang 1</div>
-      </div>
+      <div class="page-number">Trang 1</div>
+
+      <!-- Nút Chuyển Trang -->
+      <button class="nav-btn prev-btn" id="prevBtn">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="nav-btn next-btn" id="nextBtn">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
-
-    <!-- Nút Mũi Tên Sang Trang Phải -->
-    <button class="nav-btn next-btn" id="nextBtn">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
   </div>
 
   <!-- Pop-up Lỗi Code 367 -->
@@ -324,7 +241,6 @@
     const errorModal = document.getElementById('errorModal');
     const closeBtn = document.getElementById('closeBtn');
 
-    // Khi ấn nút Next hoặc Prev thì hiện thông báo lỗi Code 367
     nextBtn.addEventListener('click', showError);
     prevBtn.addEventListener('click', showError);
 
@@ -332,7 +248,6 @@
       errorModal.classList.add('active');
     }
 
-    // Đóng pop-up khi nhấn nút Đóng hoặc click ra ngoài
     closeBtn.addEventListener('click', () => {
       errorModal.classList.remove('active');
     });
